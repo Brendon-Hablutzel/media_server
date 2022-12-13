@@ -66,7 +66,7 @@ pub fn media(request: &Request, route: &str, media_dir: &str) -> Result<HttpResp
         let file_content_length = file_content.len();
         
         // NOTE: HTTP byte ranges are inclusive, but rust slices are [inclusive, exclusive],
-        // so bytes_end represents the rust slice 'exclusive' bound
+        // and bytes_end represents the HTTP (inclusive) end bound
         let bytes_end = match bytes_end {
             None => file_content_length as u64 - 1,
             Some(end) => {
